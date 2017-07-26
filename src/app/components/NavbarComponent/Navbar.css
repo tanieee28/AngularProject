@@ -1,0 +1,12 @@
+.navbar{	
+	background: linear-gradient(05deg,		#87ceeb,	#87ceeb,#87ceeb);
+}
+.h1 {
+  font-size: 36px;
+  text-align: center;
+  font-size: 5em;
+  color: #404041;
+}
+#navbar-component{
+    color:black;
+}

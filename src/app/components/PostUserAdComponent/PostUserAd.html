@@ -1,0 +1,40 @@
+<div class="Container">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3>Submit a Free Ad
+            </h3>
+        </div>
+        <div class="panel-body">
+            <form [formGroup]="PostAdForm" (ngSubmit)="onAdSubmit()" novalidate>
+                <div class="form-group">
+                    <label >Ad Title</label>
+                    <input type="text" formControlName="adTitle" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label >Name</label>
+                    <input type="text" formControlName="adName" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label >Category</label>
+                    <select class="form-control" formControlName="adCategory">
+                        <option  *ngFor="let category of categories" >{{category.name}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label >Ad Description</label>
+                    <textarea class="form-control" formControlName="adDescription"></textarea>
+                </div>
+                <div class="form-group">
+                    <label>File input</label>
+                    <input type="file" class="form-control-file" disabled>
+                    <small class="form-text text-muted">Ads With Photo sell faster. Choose your photo.</small>
+                </div>
+
+                <button type="submit" [disabled]="!PostAdForm.valid" class="btn btn-primary">Submit</button>
+                <button type="button"  class="btn btn-primary" (click)="onResetClick()">Reset</button>
+            </form>
+        </div>
+    </div>
+</div>
+<!--
+    -->
