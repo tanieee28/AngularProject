@@ -24,8 +24,8 @@ export class PostUserAdComponent{
         this.PostAdForm.reset();
     }
     onAdSubmit(){
-        //this.restService.postAd(this.PostAdForm);
-        this.router.navigate(['',true]);
+        this.restService.postAd(this.PostAdForm);
+        this.router.navigate(['/loginpage']);
     }
     onResetClick(){
         this.PostAdForm.reset();

@@ -1,0 +1,105 @@
+<div class="container">
+    <div class="well">
+        <div class="row">
+            <div class="col-sm-8" style="border-right:1px solid black">
+                <h1 align="center" style="margin-top:auto">Quick Ad Search</h1>
+
+                <div class="input-group">
+                    <select class="form-control" name="adCategory" style="width:200px">
+                        <option  *ngFor="let category of categories" >{{category.name}}</option>
+                </select>
+                    <input type="text" class="form-control" placeholder="Search for Ads here..." style="width:480px" autofocus>
+                    <span class="input-group-btn">
+                            <button class="btn btn-default" type="button"><span class="glyphicon glyphicon-search"></span></button>
+
+                    </span>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <h2 align="center" style="margin-top:auto">Post Free Ad</h2>
+                <div class="input-group">
+                    <a class="btn btn-default btn-lg" id="post_ad_btn" routerLink="/postUserAd" routerLinkActive="active">POST AD</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="exTab2" class="container">
+    <div class="row" style="margin-top:100px;">
+
+        <div class="col-sm-9">
+            <div class="tab-content">
+                <div role="tabpanel" class="tab-pane fade in active" id="vtab1">
+                    <table border="1" cellpadding="10">
+
+                        <tr>
+                            <th>Ad Id</th>
+                            <th>Ad Title</th>
+                            <th>Posted By</th>
+                            <th>Ad Description</th>
+                            <th>Category</th>
+                            <th>Options</th>
+                        </tr>
+
+                        <tr *ngFor="let obj of userAdvertises">
+
+                            <td>{{obj.id}}</td>
+                            <td>{{obj.title}}</td>
+                            <td>{{obj.name}}</td>
+                            <td>{{obj.description}}</td>
+                            <td>{{obj.category}}</td>
+                            <td>
+                                <a href="" *ngFor="let action of userActions" (click)="deleteAd(obj)">{{action.name}}</a>
+                            </td>
+                        </tr>
+                    </table>
+
+                </div>
+                <div role="tabpanel" class="tab-pane fade" id="vtab2">
+                    <h3>Tab 2</h3>
+                </div>
+                <div role="tabpanel" class="tab-pane fade in" id="vtab3">
+                    <h3>Tab 3</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="temporary" style="margin-top:100px">
+    </div>
+    <div class="row">
+        <div class="col-sm-3">
+            <a href="#" class="nav-tabs-dropdown btn btn-block btn-primary">Tabs</a>
+            <ul id="nav-tabs-wrapper" class="nav nav-tabs nav-pills nav-stacked well">
+                <li *ngFor="let item of categories"><a href="#table" (click)="onCategoryClick(item.name)" data-toggle="tab">{{item.name}}</a></li>
+            </ul>
+        </div>
+        <div class="col-sm-9">
+            <div class="tab-content">
+                <div role="tabpanel" class="tab-pane fade in active" id="table">
+                    <table border="1" cellpadding="10">
+
+                        <tr>
+                            <th>Ad Id</th>
+                            <th>Ad Title</th>
+                            <th>Posted By</th>
+                            <th>Ad Description</th>
+                            <th>Category</th>
+                            <th>Options</th>
+                        </tr>
+
+                        <tr *ngFor="let obj of filteredAdvertises">
+
+                            <td>{{obj.id}}</td>
+                            <td>{{obj.title}}</td>
+                            <td>{{obj.name}}</td>
+                            <td>{{obj.description}}</td>
+                            <td>{{obj.category}}</td>
+                            <td>
+                                <a href="" *ngFor="let action of userActions" (click)="deleteAd(obj)">{{action.name}}</a>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+        </div>
+    </div>
+</div>

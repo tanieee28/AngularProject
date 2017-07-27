@@ -16,8 +16,179 @@
             <li id="navbar-component"><a href="#aboutus" data-toggle="collapse"> About us </a></li>
         </ul>
         <!--nav navbar-nav-->
-        <ul class="nav navbar-nav navbar-right" style="margin-right:50px">
+        <ul [hidden]="isLoggedIn" class="nav navbar-nav navbar-right" style="margin-right:50px">
             <li><button class="btn btn-default navbar-btn" data-toggle="modal" data-target="#login_signup_modal"><span class="glyphicon glyphicon-user"></span> Account</button></li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right" [hidden]="!isLoggedIn">
+            <button class="btn btn-default dropdown-toggle" type="button" id="menu1" data-toggle="dropdown">Tanmay
+                    <span class="caret"></span></button>
+            <ul class="dropdown-menu"  role="menu" aria-labelledby="menu1">
+                <li class="dropdown-header">My Account</li>
+                <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Ads</a></li>
+                <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Messages</a></li>
+                <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Settings</a></li>
+                <li role="presentation" class="divider"></li>
+                <li class="dropdown-header">Favorites</li>
+                <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Ads</a></li>
+                <li role="presentation"><a role="menuitem" tabindex="-1" href="#"><span class="glyphicon glyphicon-star-empty"></span> Searches</a></li>
+                <div style="padding-left:10px;"><a href="" (click)="onMenuClick()" style="color:black;margin-top:5px;"><span class="glyphicon glyphicon-off"></span>   Log Out</a></div>
+            </ul>
         </ul>
     </div>
 </nav>
+<div class="collapse" id="aboutus" style="padding-top:60px;padding-bottom:auto;margin-bottom:auto">
+    <div class="bg-inverse p-4">
+        <h4 class="text-white">E-dalaal Pvt. Ltd.</h4>
+        <span class="text-muted">Website Created and Maintained by Tanmay R. Sharma</span>
+    </div>
+</div>
+<div class="container">
+    <div class="modal fade" id="login_signup_modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-md">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h4 class="modal-title" id="myModalLabel">Login/Registration</h4>
+                </div>
+                <div id="id01" class="modal-body">
+                    <!-- Nav tabs -->
+                    <ul class="nav nav-tabs">
+                        <li class="active"><a href="#Login" data-toggle="tab">Login</a></li>
+                        <li><a href="#Registration" data-toggle="tab">Registration</a></li>
+                    </ul>
+                    <!-- Tab panes -->
+                    <div class="tab-content">
+                        <div class="tab-pane active" id="Login">
+                            <form role="form" class="form-horizontal" [formGroup]="LoginForm" novalidate>
+                                <div class="form-group">
+                                    <label for="username" class="col-sm-2 control-label">Username</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" formControlName="username" class="form-control" placeholder="E.g., tanieee28" />
+                                        <div *ngIf="LoginForm.controls['username'].errors&&LoginForm.controls['username'].dirty">
+                                            <div *ngIf="LoginForm.controls['username'].hasError('required')" class="alert alert-danger">
+                                                Please Enter Username
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputPassword1" class="col-sm-2 control-label">Password</label>
+                                    <div class="col-sm-10">
+                                        <input type="password" formControlName="password" class="form-control" id="exampleInputPassword1" placeholder="Password"
+                                        />
+                                        <div *ngIf="LoginForm.controls['password'].errors&&LoginForm.controls['password'].dirty">
+                                            <div *ngIf="LoginForm.controls['password'].hasError('required')" class="alert alert-danger">
+                                                Please write a valid Password
+                                            </div>
+                                            <div *ngIf="LoginForm.controls['password'].hasError('minlength')" class="alert alert-danger">
+                                                Password contain minimum 8 alphanumeric characters.
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-2">
+                                    </div>
+                                    <div class="col-sm-10">
+                                        <button type="submit" [disabled]="!LoginForm.valid" data-dismiss="modal" (click)="onSubmit(0)" class="btn btn-primary btn-sm">Submit</button>
+                                        <button type="button" class="btn btn-default btn-sm" (click)="resetForm(0)">Reset</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="tab-pane" id="Registration">
+                            <form role="form" class="form-horizontal" [formGroup]="RegisterationForm" novalidate>
+                                <div class="form-group">
+                                    <label for="email" class="col-sm-2 control-label">Name</label>
+                                    <div class="col-sm-10">
+                                        <div class="row">
+                                            <div class="col-md-9">
+                                                <label for="" class="col-sm-4 control-label">First Name</label>
+                                                <input type="text" formControlName="firstname" class="form-control" placeholder="e.g. Tanmay" />
+                                                <div *ngIf="RegisterationForm.controls['firstname'].errors&&RegisterationForm.controls['firstname'].dirty">
+                                                    <div *ngIf="RegisterationForm.controls['firstname'].hasError('required')" class="alert alert-danger">
+                                                        First Name is Required
+                                                    </div>
+                                                    <div *ngIf="RegisterationForm.controls['firstname'].hasError('minlength')" class="alert alert-danger">
+                                                        First Name Should contain minimum 6 characters
+                                                    </div>
+                                                </div>
+                                                <label for="" class="col-sm-4 control-label">Last Name</label>
+                                                <input type="text" formControlName="lastname" class="form-control" placeholder="e.g. Sharma" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="email" class="col-sm-2 control-label">Email</label>
+                                    <div class="col-sm-10">
+                                        <input type="email" formControlName="useremail" class="form-control" id="email" placeholder="Email" />
+                                        <div *ngIf="RegisterationForm.controls['useremail'].errors&&RegisterationForm.controls['useremail'].dirty">
+                                            <div *ngIf="RegisterationForm.controls['useremail'].hasError('email')" class="alert alert-danger">
+                                                Email Invalid
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="mobile" class="col-sm-2 control-label">Mobile</label>
+                                    <div class="col-sm-10">
+                                        <input type="number" formControlName="mobile" class="form-control" id="mobile" placeholder="Mobile" />
+                                        <div *ngIf="RegisterationForm.controls['mobile'].errors&&RegisterationForm.controls['mobile'].dirty">
+                                            <div *ngIf="RegisterationForm.controls['mobile'].hasError('required')" class="alert alert-danger">
+                                                Mobile Number is Required
+                                            </div>
+                                            <div *ngIf="RegisterationForm.controls['mobile'].hasError('minlength')" class="alert alert-danger">
+                                                Mobile Number Should contain 10 digits.
+                                            </div>
+                                            <div *ngIf="RegisterationForm.controls['mobile'].hasError('maxlength')" class="alert alert-danger">
+                                                Mobile Number Should contain 10 digits.
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="" class="col-sm-2 control-label">Username</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" formControlName="username" class="form-control" id="username" placeholder="tanieee28" />
+                                        <div *ngIf="RegisterationForm.controls['username'].errors&&RegisterationForm.controls['username'].dirty">
+                                            <div *ngIf="RegisterationForm.controls['username'].hasError('required')" class="alert alert-danger">
+                                                User Name is Required
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="password" class="col-sm-2 control-label">Password</label>
+                                    <div class="col-sm-10">
+                                        <input type="password" formControlName="password" class="form-control" id="password" placeholder="Password" />
+                                        <div *ngIf="RegisterationForm.controls['password'].errors&&RegisterationForm.controls['password'].dirty">
+                                            <div *ngIf="RegisterationForm.controls['password'].hasError('required')" class="alert alert-danger">
+                                                Please write a valid Password
+                                            </div>
+                                            <div *ngIf="RegisterationForm.controls['password'].hasError('minlength')" class="alert alert-danger">
+                                                Password contain minimum 8 alphanumeric characters.
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-2"></div>
+                                    <div class="col-sm-10">
+                                        <button type="submit" [disabled]="!RegisterationForm.valid" data-dismiss="modal" (click)="onSubmit(1)" lass="btn btn-primary btn-sm">Register</button>
+                                        <button type="button" class="btn btn-default btn-sm" (click)="resetForm(1)">Reset</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <!--tab-pane-->
+                    </div>
+                    <!--tab-content -->
+                </div>
+                <!--modal-body-->
+            </div>
+            <!--modal-content-->
+        </div>
+        <!--model-dialog-->
+    </div>
+</div>

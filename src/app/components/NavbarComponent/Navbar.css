@@ -10,3 +10,12 @@
 #navbar-component{
     color:black;
 }
+
+/*---------------Post Ad Button------------------------*/
+
+.nav, .navbar-nav, .navbar-right{
+    margin-top:8px;
+    margin-right:8px;
+    padding-right:10px;
+
+}
